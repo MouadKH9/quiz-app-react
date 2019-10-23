@@ -1,22 +1,27 @@
-.App {
+.ant-avatar.ant-avatar-icon {
+  color: #1890ff;
+  background: transparent;
+}
+
+.ant-list-item {
+  cursor: pointer;
+}
+
+.hovered {
+  background: #bababa3b;
+}
+
+.score {
+  font-size: 2em;
   text-align: center;
+  margin-top: 100px;
 }
 
-.App-logo {
-  height: 40vmin;
+.scoreSub {
+  text-align: center;
+  color: rgb(92, 92, 92);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.score span {
+  font-weight: bold;
 }
