@@ -6,13 +6,6 @@ class Question extends React.Component {
     selected: -1,
     answers: []
   };
-  // componentWillReceiveProps() {
-  //   let answers = this.props.answers;
-  //   answers.sort(() => Math.random() - 0.5);
-  //   this.setState({
-  //     answers
-  //   });
-  // }
   onHover(index) {
     this.setState({
       hovered: index

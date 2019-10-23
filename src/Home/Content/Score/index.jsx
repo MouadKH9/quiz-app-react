@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Icon } from "antd";
+import { Button } from "antd";
 import { Row, Col } from "antd";
 
 class Score extends React.Component {
@@ -22,7 +22,11 @@ class Score extends React.Component {
             <Row type="flex" justify="center">
               <Col>
                 <Button.Group>
-                  <Button icon="reload" size="large" type="primary">
+                  <Button
+                    onClick={this.props.tryAgain}
+                    icon="reload"
+                    size="large"
+                    type="primary">
                     Try Again
                   </Button>
                   <Button icon="eye" size="large">

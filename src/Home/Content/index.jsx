@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Steps } from "antd";
+import { Steps, Icon } from "antd";
 import Question from "./Question";
 import Score from "./Score";
 const { Step } = Steps;
@@ -10,20 +10,36 @@ class Content extends React.Component {
     current: 0,
     questions: [],
     score: 0,
-    finished: false
+    finished: false,
+    loading: true
   };
   componentDidMount() {
+    this.refreshQuestions();
+  }
+
+  refreshQuestions = () => {
+    this.setState({ loading: true });
     axios
       .get(
         `https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple`
       )
       .then(res => {
-        console.log(res);
-        this.setState({ questions: res.data.results });
+        let questions = res.data.results;
+        questions.forEach(question => {
+          question.incorrect_answers.push(question.correct_answer);
+          question.incorrect_answers.sort(() => Math.random() - 0.5);
+        });
+
+        this.setState({ questions: res.data.results, loading: false });
       });
-  }
+  };
+
+  tryAgain = () => {
+    console.log("Trying again..");
+    this.refreshQuestions();
+    this.setState({ finished: false, current: 0, score: 0 });
+  };
   answered = (questionIndex, answer) => {
-    console.log(questionIndex, answer);
     if (this.state.questions[questionIndex].correct_answer === answer)
       this.setState({ score: this.state.score + 1 });
     if (this.state.current < 4)
@@ -31,8 +47,9 @@ class Content extends React.Component {
     else this.setState({ finished: true });
   };
   render() {
+    if (this.state.loading) return <Icon className="loading" type="loading" />;
     return this.state.finished ? (
-      <Score score={this.state.score} />
+      <Score score={this.state.score} tryAgain={this.tryAgain} />
     ) : (
       <div>
         <Steps current={this.state.current}>
@@ -44,11 +61,7 @@ class Content extends React.Component {
           <Question
             index={this.state.current}
             text={this.state.questions[this.state.current].question}
-            answers={this.state.questions[
-              this.state.current
-            ].incorrect_answers.concat([
-              this.state.questions[this.state.current].correct_answer
-            ])}
+            answers={this.state.questions[this.state.current].incorrect_answers}
             clicked={this.answered}
           />
         ) : null}
