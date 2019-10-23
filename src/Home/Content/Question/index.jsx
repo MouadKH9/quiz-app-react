@@ -3,7 +3,6 @@ import { List, Avatar } from "antd";
 class Question extends React.Component {
   state = {
     hovered: -1,
-    selected: -1,
     answers: []
   };
   onHover(index) {
@@ -35,7 +34,7 @@ class Question extends React.Component {
           </h3>
         }
         itemLayout="horizontal"
-        dataSource={this.props.answers}
+        dataSource={this.props.answers.concat(["Skip this question."])}
         renderItem={(item, i) => (
           <List.Item
             onClick={() => this.clicked(item)}

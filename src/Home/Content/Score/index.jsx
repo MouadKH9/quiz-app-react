@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "antd";
-import { Row, Col } from "antd";
+import { Row, Col, List } from "antd";
 
 class Score extends React.Component {
+  state = { showAnswers: false };
   render() {
     return (
       <div>
@@ -37,6 +38,26 @@ class Score extends React.Component {
             </Row>
           </Col>
         </Row>
+        <List
+          style={{
+            marginTop: 50
+          }}
+          header={
+            <h3
+              style={{
+                textAlign: "center"
+              }}>
+              Your answers
+            </h3>
+          }
+          itemLayout="horizontal"
+          dataSource={this.props.answers}
+          renderItem={(item, i) => (
+            <List.Item>
+              <List.Item.Meta title={item.question} />
+            </List.Item>
+          )}
+        />
       </div>
     );
   }

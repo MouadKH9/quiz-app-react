@@ -9,6 +9,7 @@ class Content extends React.Component {
   state = {
     current: 0,
     questions: [],
+    answers: [],
     score: 0,
     finished: false,
     loading: true
@@ -24,24 +25,41 @@ class Content extends React.Component {
         `https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple`
       )
       .then(res => {
+        res = JSON.stringify(res)
+          .replace(/&quot;/g, "'")
+          .replace(/&#039;/g, "'");
+        res = JSON.parse(res);
         let questions = res.data.results;
         questions.forEach(question => {
           question.incorrect_answers.push(question.correct_answer);
           question.incorrect_answers.sort(() => Math.random() - 0.5);
         });
 
-        this.setState({ questions: res.data.results, loading: false });
+        this.setState({
+          questions: res.data.results,
+          loading: false,
+          answers: []
+        });
       });
   };
 
   tryAgain = () => {
-    console.log("Trying again..");
     this.refreshQuestions();
     this.setState({ finished: false, current: 0, score: 0 });
   };
   answered = (questionIndex, answer) => {
-    if (this.state.questions[questionIndex].correct_answer === answer)
-      this.setState({ score: this.state.score + 1 });
+    let correct = this.state.questions[questionIndex].correct_answer === answer;
+    this.setState({
+      score: this.state.score + correct,
+      answers: this.state.answers.concat([
+        {
+          question: this.state.questions[questionIndex].question,
+          answer,
+          correct
+        }
+      ])
+    });
+
     if (this.state.current < 4)
       this.setState({ current: this.state.current + 1 });
     else this.setState({ finished: true });
@@ -49,7 +67,11 @@ class Content extends React.Component {
   render() {
     if (this.state.loading) return <Icon className="loading" type="loading" />;
     return this.state.finished ? (
-      <Score score={this.state.score} tryAgain={this.tryAgain} />
+      <Score
+        answers={this.state.answers}
+        score={this.state.score}
+        tryAgain={this.tryAgain}
+      />
     ) : (
       <div>
         <Steps current={this.state.current}>
