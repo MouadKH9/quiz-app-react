@@ -41,3 +41,18 @@
 .incorrect {
   color: red;
 }
+
+.welcome .ant-row-flex {
+  margin-top: 25px;
+}
+
+.welcome .ant-radio-group,
+.welcome .ant-select {
+  float: right;
+}
+
+.welcome .ant-col-8 h4 {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+}

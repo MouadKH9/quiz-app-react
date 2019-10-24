@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import Content from "./Content";
+import Welcome from "./Welcome";
 class Home extends React.Component {
   render() {
     return (
@@ -11,10 +11,20 @@ class Home extends React.Component {
         <Layout>
           <Layout.Content
             style={{ padding: 30, height: "80vh", overflowY: "scroll" }}>
-            <Content />
+            <Welcome />
           </Layout.Content>
         </Layout>
-        <Layout.Footer style={{ height: "10vh" }}>Footer</Layout.Footer>
+        <Layout.Footer style={{ height: "10vh" }}>
+          <span style={{ float: "right" }}>
+            Made by{" "}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="http://mouadk.online">
+              Mouad K.
+            </a>
+          </span>
+        </Layout.Footer>
       </Layout>
     );
   }

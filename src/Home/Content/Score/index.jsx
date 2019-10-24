@@ -13,13 +13,14 @@ class Score extends React.Component {
         <h1 className="score">
           Your score is{" "}
           <span>
-            {this.props.score}
-            /5
+            {this.props.score}/{this.props.amount}
           </span>
           !
         </h1>
         <h4 className="scoreSub">
-          {this.props.score > 2 ? "Great Job" : "You can do better, try again!"}
+          {this.props.score / this.props.amount > 0.5
+            ? "Great Job"
+            : "You can do better, try again!"}
         </h4>
         <Row style={{ marginTop: 30 }} type="flex" justify="center">
           <Col span={10}>

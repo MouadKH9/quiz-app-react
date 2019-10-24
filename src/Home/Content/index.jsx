@@ -22,11 +22,13 @@ class Content extends React.Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple`
+        `https://opentdb.com/api.php?amount=${this.props.amount}&category=${this.props.category}&difficulty=${this.props.diff}&type=multiple`
       )
       .then(res => {
         res = JSON.stringify(res)
           .replace(/&quot;/g, "'")
+          .replace(/&ldquo;/g, "“")
+          .replace(/&rdquo;/g, "”")
           .replace(/&#039;/g, "'");
         res = JSON.parse(res);
         let questions = res.data.results;
@@ -46,6 +48,7 @@ class Content extends React.Component {
   tryAgain = () => {
     this.refreshQuestions();
     this.setState({ finished: false, current: 0, score: 0 });
+    this.props.tryAgain();
   };
   answered = (questionIndex, answer) => {
     let correct = this.state.questions[questionIndex].correct_answer === answer;
@@ -60,7 +63,7 @@ class Content extends React.Component {
       ])
     });
 
-    if (this.state.current < 4)
+    if (this.state.current < this.props.amount - 1)
       this.setState({ current: this.state.current + 1 });
     else this.setState({ finished: true });
   };
@@ -71,6 +74,7 @@ class Content extends React.Component {
         answers={this.state.answers}
         score={this.state.score}
         tryAgain={this.tryAgain}
+        amount={this.props.amount}
       />
     ) : (
       <div>
