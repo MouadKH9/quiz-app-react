@@ -9,7 +9,8 @@ class Home extends React.Component {
           <h3 style={{ color: "white" }}>Quiz App</h3>
         </Layout.Header>
         <Layout>
-          <Layout.Content style={{ padding: 30, height: "80vh" }}>
+          <Layout.Content
+            style={{ padding: 30, height: "80vh", overflowY: "scroll" }}>
             <Content />
           </Layout.Content>
         </Layout>

@@ -1,9 +1,12 @@
 import React from "react";
 import { Button } from "antd";
-import { Row, Col, List } from "antd";
+import { Row, Col, List, Icon } from "antd";
 
 class Score extends React.Component {
   state = { showAnswers: false };
+  toggleAnswers = () => {
+    this.setState({ showAnswers: !this.state.showAnswers });
+  };
   render() {
     return (
       <div>
@@ -30,34 +33,45 @@ class Score extends React.Component {
                     type="primary">
                     Try Again
                   </Button>
-                  <Button icon="eye" size="large">
-                    View answers
+                  <Button
+                    icon={!this.state.showAnswers ? "eye" : "eye-invisible"}
+                    size="large"
+                    onClick={this.toggleAnswers}>
+                    {this.state.showAnswers ? "Hide" : "View"} answers
                   </Button>
                 </Button.Group>
               </Col>
             </Row>
           </Col>
         </Row>
-        <List
-          style={{
-            marginTop: 50
-          }}
-          header={
-            <h3
-              style={{
-                textAlign: "center"
-              }}>
-              Your answers
-            </h3>
-          }
-          itemLayout="horizontal"
-          dataSource={this.props.answers}
-          renderItem={(item, i) => (
-            <List.Item>
-              <List.Item.Meta title={item.question} />
-            </List.Item>
-          )}
-        />
+        {this.state.showAnswers ? (
+          <List
+            style={{
+              marginTop: 50
+            }}
+            header={
+              <h3
+                style={{
+                  textAlign: "center"
+                }}>
+                Your answers
+              </h3>
+            }
+            itemLayout="horizontal"
+            dataSource={this.props.answers}
+            renderItem={(item, i) => (
+              <List.Item>
+                <List.Item.Meta title={item.question} />
+                {item.answer}{" "}
+                {item.correct ? (
+                  <Icon className="correct" type="check" />
+                ) : (
+                  <Icon className="incorrect" type="close" />
+                )}
+              </List.Item>
+            )}
+          />
+        ) : null}
       </div>
     );
   }
