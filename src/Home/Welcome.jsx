@@ -48,10 +48,10 @@ class Welcome extends React.Component {
     ) : (
       <div className="welcome">
         <Row type="flex" justify="center">
-          <Col span={8}>
+          <Col className="left-col">
             <h4>Difficulty:</h4>
           </Col>
-          <Col span={8}>
+          <Col>
             <Radio.Group
               onChange={this.diffChange}
               defaultValue="medium"
@@ -63,10 +63,10 @@ class Welcome extends React.Component {
           </Col>
         </Row>
         <Row type="flex" justify="center">
-          <Col span={8}>
+          <Col className="left-col">
             <h4>Number of questions:</h4>
           </Col>
-          <Col span={8}>
+          <Col>
             <Radio.Group
               onChange={this.amountChange}
               defaultValue="5"
@@ -78,10 +78,10 @@ class Welcome extends React.Component {
           </Col>
         </Row>
         <Row type="flex" justify="center">
-          <Col span={8}>
+          <Col className="left-col">
             <h4>Category:</h4>
           </Col>
-          <Col span={8}>
+          <Col>
             <Select
               placeholder="Select a category"
               style={{ width: 220 }}

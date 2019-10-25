@@ -23,7 +23,7 @@ class Score extends React.Component {
             : "You can do better, try again!"}
         </h4>
         <Row style={{ marginTop: 30 }} type="flex" justify="center">
-          <Col span={10}>
+          <Col span={24}>
             <Row type="flex" justify="center">
               <Col>
                 <Button.Group>
@@ -35,8 +35,8 @@ class Score extends React.Component {
                     Try Again
                   </Button>
                   <Button
-                    icon={!this.state.showAnswers ? "eye" : "eye-invisible"}
                     size="large"
+                    icon={!this.state.showAnswers ? "eye" : "eye-invisible"}
                     onClick={this.toggleAnswers}>
                     {this.state.showAnswers ? "Hide" : "View"} answers
                   </Button>

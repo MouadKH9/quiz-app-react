@@ -56,3 +56,19 @@
   position: absolute;
   top: 40%;
 }
+
+.ant-col.left-col {
+  padding: 5px 20px;
+}
+
+@media (max-width: 480px) {
+  .ant-steps-horizontal.ant-steps-label-horizontal {
+    display: inline-flex;
+  }
+
+  .ant-steps-horizontal.ant-steps-label-horizontal .ant-steps-item {
+    display: inline-block;
+    margin: -15px;
+    overflow: visible;
+  }
+}

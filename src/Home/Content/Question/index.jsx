@@ -22,7 +22,7 @@ class Question extends React.Component {
     return (
       <List
         style={{
-          marginTop: 50
+          marginTop: 20
         }}
         header={
           <h3
